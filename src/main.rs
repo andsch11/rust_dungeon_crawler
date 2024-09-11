@@ -3,11 +3,11 @@ mod presenter;
 mod shared_types;
 mod view;
 
-const SCREEN_WIDTH: usize = 80;
-const SCREEN_HEIGHT: usize = 40;
-const DISPLAY_WIDTH: usize = SCREEN_WIDTH / 2;
-const DISPLAY_HEIGHT: usize = SCREEN_HEIGHT / 2;
-const ROOM_COUNT: usize = 2;
+const MODEL_WIDTH: usize = 80;
+const MODEL_HEIGHT: usize = 40;
+const DISPLAY_WIDTH: usize = MODEL_WIDTH / 2;
+const DISPLAY_HEIGHT: usize = MODEL_HEIGHT / 2;
+const ROOM_COUNT: usize = 10;
 const ROOM_MIN_SIZE: usize = 2;
 const ROOM_MAX_SIZE: usize = 10;
 
@@ -34,8 +34,8 @@ fn main() {
     // let model = Model::new(SCREEN_WIDTH, SCREEN_HEIGHT, None, None);
     // let view = View::new(SCREEN_WIDTH, SCREEN_HEIGHT);
     let model = Model::new().default(
-        DISPLAY_WIDTH,
-        DISPLAY_HEIGHT,
+        MODEL_WIDTH,
+        MODEL_HEIGHT,
         ROOM_COUNT,
         ROOM_MIN_SIZE,
         ROOM_MAX_SIZE,
