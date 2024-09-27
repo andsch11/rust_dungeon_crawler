@@ -1,7 +1,7 @@
-use crate::model::map_builder::MapBuilder;
-use crate::model::random_number_generator::RealRng;
 use crate::model::map::Map;
+use crate::model::map_builder::MapBuilder;
 use crate::model::player::Player;
+use crate::model::random_number_generator::RealRng;
 
 use crate::shared_types::Movement;
 use crate::shared_types::TileType;
@@ -16,6 +16,10 @@ pub trait GetTile {
 
 pub trait GetPlayerPosition {
     fn get_player_position(&self) -> Point;
+}
+
+pub trait InBounds {
+    fn is_in_map_bounds(&self, point: Point) -> bool;
 }
 
 pub struct Model {
@@ -36,9 +40,14 @@ impl GetPlayerPosition for Model {
     }
 }
 
+impl InBounds for Model {
+    fn is_in_map_bounds(&self, point: Point) -> bool {
+        self.map.in_bounds(point)
+    }
+}
+
 impl Model {
-    pub fn new() -> ModelBuilder
-    {
+    pub fn new() -> ModelBuilder {
         ModelBuilder::new()
     }
     pub fn game_logic_update(&mut self, movement: Movement) {
@@ -56,28 +65,28 @@ impl Model {
     }
 }
 
-pub struct ModelBuilder
-{
+pub struct ModelBuilder {
     map: Option<Map>,
     player_starting_point: Option<Point>,
 }
 
 // https://rust-unofficial.github.io/patterns/patterns/creational/builder.html
-impl ModelBuilder
-{
-    pub fn new() -> ModelBuilder
-    {
-        ModelBuilder { map: None, player_starting_point: None }
+impl ModelBuilder {
+    pub fn new() -> ModelBuilder {
+        ModelBuilder {
+            map: None,
+            player_starting_point: None,
+        }
     }
 
-    pub fn default(mut self,
-                   width: usize,
-                   height: usize,
-                   room_count: usize,
-                   min_room_size: usize,
-                   max_room_size: usize,
-    ) -> ModelBuilder
-    {
+    pub fn default(
+        mut self,
+        width: usize,
+        height: usize,
+        room_count: usize,
+        min_room_size: usize,
+        max_room_size: usize,
+    ) -> ModelBuilder {
         // let mut rng = PreProgrammedRandomNumbers::new(VecDeque::from([
         //     0.0f32, 0.0f32, 0.0f32, 0.0f32, 0.5f32, 0.5f32, 1.0f32, 1.0f32,
         // ]));
@@ -96,15 +105,13 @@ impl ModelBuilder
     }
 
     #[allow(dead_code)]
-    pub fn custom_map(mut self, map: Map, player_starting_point: Point) -> ModelBuilder
-    {
+    pub fn custom_map(mut self, map: Map, player_starting_point: Point) -> ModelBuilder {
         self.map = Option::from(map);
         self.player_starting_point = Option::from(player_starting_point);
         self
     }
 
-    pub fn build(self) -> Model
-    {
+    pub fn build(self) -> Model {
         assert!(self.map.is_some());
         assert!(self.player_starting_point.is_some());
 

@@ -8,7 +8,9 @@ mod my_test_map_builder {
 
     #[test]
     fn test_basic() {
-        let mut rng = PreProgrammedRandomNumbers::new(VecDeque::from([0.1f32, 0.2f32, 0.3f32, 0.4f32, 0.5f32, 0.6f32, 0.7f32, 0.8f32]));
+        let mut rng = PreProgrammedRandomNumbers::new(VecDeque::from([
+            0.1f32, 0.2f32, 0.3f32, 0.4f32, 0.5f32, 0.6f32, 0.7f32, 0.8f32,
+        ]));
         let mp = MapBuilder::new(10, 10, 2, 1, 2, &mut rng);
         assert_eq!(mp.rooms.len(), 2);
     }

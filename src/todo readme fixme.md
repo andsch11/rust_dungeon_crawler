@@ -10,7 +10,8 @@
 
 # Book
 
-- page 472
+- page 490
+  - BUG in camera view (left edge all black suddenly )
 
 # To Discuss
 

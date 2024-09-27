@@ -2,13 +2,15 @@
 // FIXME is this needed to make cargo aware that these modules are there and need to be compiled ???
 mod game_logic;
 mod map;
-mod player;
 mod map_builder;
+mod player;
 mod random_number_generator;
 
-// public interface of this module
+// public interface of this module:
+
 pub use game_logic::GetPlayerPosition;
 pub use game_logic::GetTile;
+pub use game_logic::InBounds;
 pub use game_logic::Model;
 
 // test helpers

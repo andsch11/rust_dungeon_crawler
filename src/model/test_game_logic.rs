@@ -1,11 +1,11 @@
 #[cfg(test)]
 mod my_test_model_module_name_fixme {
+    use crate::model::map::Map;
     use crate::model::GetPlayerPosition;
     use crate::model::Model;
     use crate::shared_types::Movement;
     use crate::shared_types::TileType;
     use bracket_lib::geometry::Point;
-    use crate::model::map::Map;
 
     #[test]
     fn test_basic() {
@@ -29,7 +29,7 @@ mod my_test_model_module_name_fixme {
             TileType::Floor,
             TileType::Floor,
         ];
- 
+
         let map = Map::new(2, 2, tiles);
         let mut model = Model::new().custom_map(map, Point::new(0, 0)).build();
         let start_position = model.get_player_position();

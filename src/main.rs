@@ -33,13 +33,15 @@ fn main() {
     // these lines we need later when camera view is working
     // let model = Model::new(SCREEN_WIDTH, SCREEN_HEIGHT, None, None);
     // let view = View::new(SCREEN_WIDTH, SCREEN_HEIGHT);
-    let model = Model::new().default(
-        MODEL_WIDTH,
-        MODEL_HEIGHT,
-        ROOM_COUNT,
-        ROOM_MIN_SIZE,
-        ROOM_MAX_SIZE,
-    ).build();
+    let model = Model::new()
+        .default(
+            MODEL_WIDTH,
+            MODEL_HEIGHT,
+            ROOM_COUNT,
+            ROOM_MIN_SIZE,
+            ROOM_MAX_SIZE,
+        )
+        .build();
     let view = View::new(DISPLAY_WIDTH, DISPLAY_HEIGHT);
     let _ = main_loop(context, Presenter::new(model, view));
 }
