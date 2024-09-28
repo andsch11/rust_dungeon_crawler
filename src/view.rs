@@ -45,12 +45,9 @@ impl View {
             for x in camera.left_x..camera.right_x {
                 let point = Point::new(x, y);
                 if !in_bounds_provider.is_in_map_bounds(point) {
-                    break;
+                    continue;
                 }
-                let tile = model.get_tile(Point {
-                    x: x.try_into().unwrap(),
-                    y: y.try_into().unwrap(),
-                });
+                let tile = model.get_tile(point);
                 match tile {
                     TileType::Floor => {
                         ctx.set(
@@ -70,9 +67,9 @@ impl View {
                             to_cp437('#'),
                         );
                     }
-                }
-            }
-        }
+                } // match
+            } //  for x
+        } // for y
     }
 
     pub fn render_player(
