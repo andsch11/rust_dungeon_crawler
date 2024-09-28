@@ -16,6 +16,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - name: Install libfontconfig
+      run: sudo apt-get install -y libfontconfig1-dev libfontconfig
     - name: Build
       run: cargo build --verbose
     - name: Run tests
